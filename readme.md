@@ -56,7 +56,7 @@ presentation           ← Reveal JS apresentação do projeto
 
 ```bash
 sudo apt update
-sudo apt install -y apache2 certbot python3-certbot-apache nodejs npm mongodb
+sudo apt install -y curl gpg apache2 certbot python3-certbot-apache nodejs npm mongodb
 ```
 
 #### Caso tenha problemas com MongoDB
