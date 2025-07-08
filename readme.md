@@ -231,7 +231,7 @@ cd backend
 ```bash
 npm run start
 ```
-or
+ou
 ```bash
 npm run start:pm2
 ```
