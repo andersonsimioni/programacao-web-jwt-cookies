@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function CookiesLog() {
   const [cookies, setCookies] = useState('');
+  const [docCookie, setDocCookie] = useState('');
   const [jwtDecoded, setJwtDecoded] = useState('');
   const [apiResponse, setApiResponse] = useState('');
 
@@ -16,6 +17,7 @@ export default function CookiesLog() {
   const updateCookies = (data) => {
     try
     {
+      setDocCookie(document.cookie);
       setCookies(JSON.stringify(data.log.cookies, null, 2));
       setJwtDecoded(JSON.stringify(data.log.decodedJWT, null, 2));
     }
@@ -45,6 +47,11 @@ export default function CookiesLog() {
         <button className="log-btn" onClick={handleLog}>
           Enviar cookies para o servidor
         </button>
+
+        <div className="log-card">
+          <h4>🍪 Cookies (document.cookie API)</h4>
+          <pre>{docCookie}</pre>
+        </div>
 
         <div className="log-card">
           <h4>🍪 Cookies</h4>
