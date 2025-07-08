@@ -18,6 +18,10 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
+  'http://cookies.wyllian.bs.vms.ufsc.br',
+
+  'https://localhost:5173',
+  'https://localhost:3000',
   'https://cookies.wyllian.bs.vms.ufsc.br'
 ];
 

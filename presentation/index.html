@@ -1,11 +1,16 @@
-
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>JWT + Cookies + MongoDB</title>
+    <title>Aplicação Segura: JWT + Cookies + MongoDB</title>
     <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/white.css">
+    <style>
+      h1, h2, h3, p, li { text-align: left; }
+      img { border-radius: 12px; box-shadow: 0 0 10px #000; margin: 20px 0; max-width: 600px; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 8px; border: 1px solid #ccc; }
+    </style>
   </head>
   <body>
     <div class="reveal">
@@ -13,110 +18,250 @@
 
         <section>
           <h1>JWT + Cookies + MongoDB</h1>
-          <p>Aplicação Web Segura com Node.js</p>
-          <p><small>Ubuntu 24.04 + React + Express + MongoDB</small></p>
+          <p><strong>Aplicação Web Segura</strong></p>
+          <p><small>Ubuntu 24.04 • React + Vite • Node.js + Express • MongoDB</small></p>
         </section>
 
         <section>
-          <h2>Objetivo</h2>
+          <h2>O que é JWT?</h2>
           <ul>
-            <li>Demonstrar autenticação segura com JWT</li>
-            <li>Gerenciar sessões com cookies</li>
-            <li>Armazenar logs e tokens no MongoDB</li>
+            <li><strong>JWT (JSON Web Token)</strong> é um formato compacto e seguro para transmitir informações entre partes como um objeto JSON.</li>
+            <li>É amplamente utilizado para <strong>autenticação</strong> em aplicações web.</li>
+            <li>Um JWT é composto por três partes: <code>Header</code>, <code>Payload</code> e <code>Signature</code>.</li>
           </ul>
         </section>
 
         <section>
-          <h2>Arquitetura da Aplicação</h2>
+          <h2>Estrutura do Token JWT</h2>
           <ul>
-            <li>Back-end: Node.js + Express</li>
-            <li>Front-end: React + Vite</li>
-            <li>Banco de dados: MongoDB</li>
-            <li>Servidor: Ubuntu 24.04 + Apache</li>
+            <li><strong>Header:</strong> Tipo do token e algoritmo de assinatura.</li>
+            <li><strong>Payload:</strong> Dados (claims) como ID do usuário, permissões, etc.</li>
+            <li><strong>Signature:</strong> Verifica a integridade do token usando segredo ou chave privada.</li>
+          </ul>
+          <p>Exemplo: <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></p>
+        </section>
+
+        <section>
+          <img src="./img/middleware-jwt-3.png" alt="Código do middleware que valida o JWT com jsonwebtoken">
+        </section>
+
+        <section>
+          <h2>Como funciona o JWT na prática?</h2>
+          <ol>
+            <li>Usuário faz login com email e senha.</li>
+            <li>Servidor valida e gera um JWT.</li>
+            <li>O JWT é enviado ao navegador como um <strong>cookie seguro</strong>.</li>
+            <li>Em cada requisição futura, o navegador envia o cookie automaticamente.</li>
+            <li>Middleware no servidor valida o JWT e autentica o usuário.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>O que são Cookies?</h2>
+          <ul>
+            <li>Cookies são pequenos arquivos salvos pelo navegador para guardar dados.</li>
+            <li>Podem armazenar sessões, preferências e tokens como o JWT.</li>
+            <li>São enviados automaticamente a cada requisição ao servidor.</li>
           </ul>
         </section>
 
         <section>
-          <h2>Fluxo da Autenticação</h2>
-          <p>Login → Geração de JWT → Cookie → Validação</p>
-          <img style="max-width: 600px;" src="./img/flux.png">
+          <h2>Cookies e Segurança</h2>
+          <ul>
+            <li><code>HttpOnly</code>: impede acesso via JavaScript.</li>
+            <li><code>Secure</code>: só é enviado por HTTPS.</li>
+            <li><code>SameSite</code>: controla envio em requisições cross-site.</li>
+          </ul>
         </section>
+
+        <section>
+          <h2>Objetivo do Projeto</h2>
+          <ul>
+            <li>Autenticação segura via JWT</li>
+            <li>Gerenciamento de sessões com cookies</li>
+            <li>Armazenamento e visualização de logs</li>
+            <li>Experiência didática com segurança web</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Arquitetura Geral</h2>
+          <ul>
+            <li><strong>Frontend:</strong> React + Vite</li>
+            <li><strong>Backend:</strong> Node.js + Express</li>
+            <li><strong>Banco:</strong> MongoDB</li>
+            <li><strong>Servidor:</strong> Ubuntu 24.04 com Apache</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Servidor Web com HTTPS</h2>
+          <ul>
+            <li>Apache configurado como <strong>proxy reverso</strong> para a API Node.js.</li>
+            <li>Requisições HTTP são redirecionadas para HTTPS.</li>
+            <li>Uso de <strong>certificado autoassinado</strong> para ambiente local seguro.</li>
+            <li>HTTPS é obrigatório para cookies com a flag <code>Secure</code>.</li>
+          </ul>
+        </section>
+
+        <section>
+          <img src="./img/apache-https.png" alt="Configuração do Apache como proxy reverso com HTTPS e certificado autoassinado">
+        </section>
+
+
+        <section>
+          <h2>Fluxo Completo da Aplicação</h2>
+          <ol>
+            <li>Usuário acessa o site e faz <strong>login</strong> com credenciais.</li>
+            <li>Backend valida e gera um <strong>JWT</strong>.</li>
+            <li>JWT é enviado como <strong>cookie seguro</strong> com flags <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite</code>.</li>
+            <li>Navegador envia o cookie automaticamente em cada requisição futura.</li>
+            <li><strong>Middleware JWT</strong> valida o token e autentica o usuário.</li>
+            <li><strong>Middleware de Cookies</strong> pode ler e salvar os cookies no MongoDB.</li>
+            <li>API responde com os dados solicitados.</li>
+          </ol>
+        </section>
+
+        <section>
+          <img src="./img/flux.png" alt="Fluxo completo com JWT, Cookies e MongoDB incluindo middleware e resposta da API">
+        </section>
+
 
         <section>
           <h2>Rotas da API</h2>
           <table>
-            <thead><tr><th>Método</th><th>Rota</th><th>Descrição</th></tr></thead>
+            <thead><tr><th>Método</th><th>Rota</th><th>Função</th></tr></thead>
             <tbody>
-              <tr><td>POST</td><td>/login</td><td>Autenticação</td></tr>
+              <tr><td>POST</td><td>/login</td><td>Login e envio de JWT</td></tr>
               <tr><td>POST</td><td>/register</td><td>Cadastro de usuário</td></tr>
-              <tr><td>GET</td><td>/me</td><td>Dados do usuário</td></tr>
-              <tr><td>GET</td><td>/log-cookies</td><td>Log de cookies</td></tr>
-              <tr><td>GET</td><td>/cookies-db</td><td>Listar logs</td></tr>
+              <tr><td>GET</td><td>/me</td><td>Dados do usuário autenticado</td></tr>
+              <tr><td>GET</td><td>/log-cookies</td><td>Salvar cookies recebidos</td></tr>
+              <tr><td>GET</td><td>/cookies-db</td><td>Visualizar logs no MongoDB</td></tr>
+              <tr><td>POST</td><td>/logout</td><td>Expiração do cookie JWT</td></tr>
             </tbody>
           </table>
         </section>
 
         <section>
           <h2>Interface do Usuário</h2>
+          <p>Login, Registro, Visualização de Cookies, JWT decodificado, Dashboard</p>
+        </section>
+
+        <section>
+          <img src="./img/dashboard.png" alt="Dashboard do usuário">
+        </section>
+
+        <section>
+          <img src="./img/login.png" alt="Tela de login">
+        </section>
+
+        <section>
+          <img src="./img/register-page.png" alt="Tela de registro">
+        </section>
+
+        <section>
+          <h2>Visualização de Cookies</h2>
+        </section>
+
+        <section>
+          <img src="./img/log-cookies-1.png" alt="Log de cookies 1">
+        </section>
+
+        <section>
+          <img src="./img/log-cookies-2.png" alt="Log de cookies 2">
+        </section>
+
+        <section>
+          <img src="./img/cookies-db.png" alt="Dados armazenados no MongoDB">
+        </section>
+
+        <section>
+          <h2>Exemplo de Código</h2>
+        </section>
+
+        <section>
+          <img src="./img/register.png" alt="Código da rota de registro">
+        </section>
+
+        <section>
+          <img src="./img/mongodb-cookies.png" alt="Cookies salvos no MongoDB">
+        </section>
+
+        <section>
+        <h2>Middleware JWT</h2>
+        <ul>
+          <li>Valida o token em cada requisição autenticada.</li>
+          <li>Protege rotas: impede acesso sem JWT válido.</li>
+          <li>Usa a biblioteca <code>jsonwebtoken</code>.</li>
+          <li>Exemplo: <code>jwt.verify(token, JWT_SECRET)</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <img src="./img/middleware-jwt.png" alt="Código do middleware que valida o JWT com jsonwebtoken">
+      </section>
+
+      <section>
+        <img src="./img/middleware-jwt-2.png" alt="Código do middleware que valida o JWT com jsonwebtoken">
+      </section>
+
+      
+
+      <section>
+        <h2>Middleware de Cookies</h2>
+        <ul>
+          <li>Lê cookies enviados pelo navegador com <code>req.cookies</code>.</li>
+          <li>Envia cookies usando <code>res.cookie()</code>.</li>
+          <li>Armazena os dados dos cookies no MongoDB para auditoria e análise.</li>
+          <li>Usa <code>cookie-parser</code> no Node.js para processar cookies automaticamente.</li>
+        </ul>
+      </section>
+
+      <section>
+        <img src="./img/middleware-cookies.png" alt="Código do middleware que lê e salva cookies no MongoDB usando cookie-parser">
+      </section>
+
+      <section>
+        <img src="./img/middleware-cookies-2.png" alt="Código do middleware que lê e salva cookies no MongoDB usando cookie-parser">
+      </section>
+
+
+        <section>
+          <h2>Boas Práticas de Segurança</h2>
           <ul>
-            <li>Login / Registro</li>
-            <li>Visualização de cookies</li>
-            <li>Decodificação do JWT</li>
+            <li>Cookies com flags <code>HttpOnly</code>, <code>Secure</code> e <code>SameSite</code></li>
+            <li>JWT com tempo de expiração</li>
+            <li>Uso de HTTPS com certificado</li>
+            <li>Armazenamento seguro no MongoDB</li>
           </ul>
-          <img style="max-width: 600px;" src="./img/log-cookies-1.png">
         </section>
 
         <section>
-          <h2>Interface do Usuário</h2>
-          <img style="max-width: 600px;" src="./img/log-cookies-2.png">
-        </section>
-
-        <section>
-          <h2>Interface do Usuário</h2>
-          <img style="max-width: 600px;" src="./img/dashboard.png">
-        </section>
-
-        <section>
-          <h2>Interface do Usuário</h2>
-          <img style="max-width: 600px;" src="./img/login.png">
-        </section>
-
-        <section>
-          <h2>Interface do Usuário</h2>
-          <img style="max-width: 600px;" src="./img/register-page.png">
-        </section>
-
-        <section>
-          <h2>Interface do Usuário</h2>
-          <img style="max-width: 600px;" src="./img/cookies-db.png">
-        </section>
-
-        <section>
-          <h2>Código: Registro</h2>
-          <img style="max-width: 600px;" src="./img/register.png">
-        </section>
-
-        <section>
-          <h2>Cookies no MongoDB</h2>
-          <p>Exemplo de documento:</p>
-          <img style="max-width: 600px;" src="./img/mongodb-cookies.png">
-        </section>
-
-        <section>
-          <h2>Boas Práticas</h2>
+          <h2>Variáveis de Ambiente</h2>
           <ul>
-            <li>HttpOnly, Secure, SameSite</li>
-            <li>JWT com expiração</li>
-            <li>HTTPS com certificado</li>
+            <li><code>JWT_SECRET</code>: chave para assinar o token</li>
+            <li><code>MONGODB_URI</code>: conexão com o banco</li>
+            <li><code>PORT</code>: porta do servidor</li>
+            <li><code>COOKIE_SECRET</code>: criptografia de cookies</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Comentários Didáticos</h2>
+          <ul>
+            <li>JWT e Cookies explicados na prática</li>
+            <li>Visualização interativa no navegador</li>
+            <li>MongoDB como laboratório de logs</li>
+            <li>Uso educativo para segurança web</li>
           </ul>
         </section>
 
         <section>
           <h2>Conclusão</h2>
           <ul>
-            <li>Aplicação didática e segura</li>
-            <li>Arquitetura modular e escalável</li>
-            <li>Base sólida para projetos reais</li>
+            <li>Aplicação modular, segura e didática</li>
+            <li>Integra JWT, cookies e MongoDB com clareza</li>
+            <li>Ideal para estudar e aplicar segurança web</li>
           </ul>
         </section>
 

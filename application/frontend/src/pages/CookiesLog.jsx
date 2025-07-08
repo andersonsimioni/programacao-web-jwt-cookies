@@ -13,43 +13,27 @@ export default function CookiesLog() {
     updateCookies();
   }, []);
 
-  const updateCookies = () => {
-    const cookieString = document.cookie || 'Nenhum cookie';
-    setCookies(cookieString);
-    
-    // buscar o cookie chamado token
-    const tokenCookie = cookieString
-      .split('; ')
-      .find((c) => c.startsWith('token='));
-
-    if (tokenCookie) {
-      const token = tokenCookie.split('=')[1];
-      try {
-        const payload = token.split('.')[1];
-        const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
-        const decoded = JSON.parse(
-          decodeURIComponent(
-            escape(window.atob(base64))
-          )
-        );
-        setJwtDecoded(JSON.stringify(decoded, null, 2));
-      } catch {
-        setJwtDecoded('Erro ao decodificar JWT');
-      }
-    } else {
-      setJwtDecoded('Nenhum JWT encontrado');
+  const updateCookies = (data) => {
+    try
+    {
+      setCookies(JSON.stringify(data.log.cookies, null, 2));
+      setJwtDecoded(JSON.stringify(data.log.decodedJWT, null, 2));
+    }
+    catch
+    {
+      setCookies("Aguardando envio..");
+      setJwtDecoded("Aguardando envio..");
     }
   };
 
   const handleLog = async () => {
     try {
       const data = await logCookies();
-      setApiResponse(JSON.stringify(data, null, 2));
+      setApiResponse(JSON.stringify(data.log, null, 2));
+      updateCookies(data);
     } catch {
       setApiResponse('Erro ao enviar para a API');
     }
-
-    updateCookies();
   };
 
   return (
