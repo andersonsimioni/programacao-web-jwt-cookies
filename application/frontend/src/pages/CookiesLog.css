@@ -1,0 +1,109 @@
+/* Reset geral */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f2f4f8;
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+/* Wrapper pra centralizar tudo */
+.log-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Página centralizada */
+.log-page {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título */
+.log-title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  width: 100%;
+  color: #222;
+}
+
+/* Botão de envio */
+.log-btn {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  max-width: 700px;
+}
+
+.log-btn:hover {
+  background-color: #005ecb;
+}
+
+/* Cartões */
+.log-card {
+  width: 100%;
+  max-width: 700px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+}
+
+.log-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+/* Bloco de texto */
+.log-card pre {
+  background-color: #f4f4f4;
+  padding: 0.85rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #222;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .log-title {
+    font-size: 1.5rem;
+  }
+
+  .log-btn {
+    font-size: 0.95rem;
+  }
+
+  .log-card {
+    padding: 1.2rem;
+  }
+
+  .log-card h4 {
+    font-size: 0.95rem;
+  }
+
+  .log-card pre {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "application",
+  "version": "1.0.0",
+  "description": "Este projeto tem como objetivo demonstrar, de forma educacional, o uso de autenticação com JWT, manipulação de cookies, armazenamento de logs no MongoDB, e proteção via HTTPS autoassinado. A aplicação roda em um servidor Ubuntu 24.04 e é acessada via Apache (proxy reverso).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node src/app.js",
+    "start": "NODE_ENV=production node src/app.js",
+    "start:pm2": "pm2 start src/app.js --name cookies-backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.1"
+  }
+}

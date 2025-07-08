@@ -1,0 +1,128 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JWT + Cookies + MongoDB</title>
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/white.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h1>JWT + Cookies + MongoDB</h1>
+          <p>Aplicação Web Segura com Node.js</p>
+          <p><small>Ubuntu 24.04 + React + Express + MongoDB</small></p>
+        </section>
+
+        <section>
+          <h2>Objetivo</h2>
+          <ul>
+            <li>Demonstrar autenticação segura com JWT</li>
+            <li>Gerenciar sessões com cookies</li>
+            <li>Armazenar logs e tokens no MongoDB</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Arquitetura da Aplicação</h2>
+          <ul>
+            <li>Back-end: Node.js + Express</li>
+            <li>Front-end: React + Vite</li>
+            <li>Banco de dados: MongoDB</li>
+            <li>Servidor: Ubuntu 24.04 + Apache</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Fluxo da Autenticação</h2>
+          <p>Login → Geração de JWT → Cookie → Validação</p>
+          <img style="max-width: 600px;" src="./img/flux.png">
+        </section>
+
+        <section>
+          <h2>Rotas da API</h2>
+          <table>
+            <thead><tr><th>Método</th><th>Rota</th><th>Descrição</th></tr></thead>
+            <tbody>
+              <tr><td>POST</td><td>/login</td><td>Autenticação</td></tr>
+              <tr><td>POST</td><td>/register</td><td>Cadastro de usuário</td></tr>
+              <tr><td>GET</td><td>/me</td><td>Dados do usuário</td></tr>
+              <tr><td>GET</td><td>/log-cookies</td><td>Log de cookies</td></tr>
+              <tr><td>GET</td><td>/cookies-db</td><td>Listar logs</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Interface do Usuário</h2>
+          <ul>
+            <li>Login / Registro</li>
+            <li>Visualização de cookies</li>
+            <li>Decodificação do JWT</li>
+          </ul>
+          <img style="max-width: 600px;" src="./img/log-cookies-1.png">
+        </section>
+
+        <section>
+          <h2>Interface do Usuário</h2>
+          <img style="max-width: 600px;" src="./img/log-cookies-2.png">
+        </section>
+
+        <section>
+          <h2>Interface do Usuário</h2>
+          <img style="max-width: 600px;" src="./img/dashboard.png">
+        </section>
+
+        <section>
+          <h2>Interface do Usuário</h2>
+          <img style="max-width: 600px;" src="./img/login.png">
+        </section>
+
+        <section>
+          <h2>Interface do Usuário</h2>
+          <img style="max-width: 600px;" src="./img/register-page.png">
+        </section>
+
+        <section>
+          <h2>Interface do Usuário</h2>
+          <img style="max-width: 600px;" src="./img/cookies-db.png">
+        </section>
+
+        <section>
+          <h2>Código: Registro</h2>
+          <img style="max-width: 600px;" src="./img/register.png">
+        </section>
+
+        <section>
+          <h2>Cookies no MongoDB</h2>
+          <p>Exemplo de documento:</p>
+          <img style="max-width: 600px;" src="./img/mongodb-cookies.png">
+        </section>
+
+        <section>
+          <h2>Boas Práticas</h2>
+          <ul>
+            <li>HttpOnly, Secure, SameSite</li>
+            <li>JWT com expiração</li>
+            <li>HTTPS com certificado</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Conclusão</h2>
+          <ul>
+            <li>Aplicação didática e segura</li>
+            <li>Arquitetura modular e escalável</li>
+            <li>Base sólida para projetos reais</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+    <script>Reveal.initialize();</script>
+  </body>
+</html>
