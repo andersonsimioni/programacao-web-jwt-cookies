@@ -56,7 +56,9 @@ presentation           ← Reveal JS apresentação do projeto
 
 ```bash
 sudo apt update
-sudo apt install -y curl gpg apache2 certbot python3-certbot-apache nodejs npm mongodb
+sudo apt install -y curl gpg apache2 openssl nodejs npm mongodb certbot python3-certbot-apache
+
+sudo npm install -g pm2
 ```
 
 #### Caso tenha problemas com MongoDB
@@ -111,10 +113,15 @@ certbot --version # Verificar Certbot
 ### (Recomendado para ambientes personalizados ou proxy reverso)
 
 ```bash
-sudo certbot certonly --standalone -d seu-dominio.com
+sudo mkdir -p /etc/letsencrypt/live/seu-dominio.com
+
+sudo openssl req -x509 -newkey rsa:2048 -nodes \
+  -keyout /etc/letsencrypt/live/seu-dominio.com/privkey.pem \
+  -out /etc/letsencrypt/live/seu-dominio.com/fullchain.pem \
+  -days 365
 ```
 
-Isso irá gerar certificados válidos em:
+Isso irá gerar certificados em:
 
 ```
 /etc/letsencrypt/live/seu-dominio.com/fullchain.pem
@@ -185,6 +192,11 @@ Edite ou crie um VirtualHost:
 
 ```bash
 sudo nano /etc/apache2/sites-available/cookiesapp.conf
+
+sudo a2enmod ssl
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo systemctl restart apache2
 ```
 
 Conteúdo:
