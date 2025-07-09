@@ -11,7 +11,7 @@ Aplicação educacional full stack com autenticação via JWT (armazenado em coo
 - Proteção de rotas no frontend (React Router)
 - Log de cookies locais + decodificação do JWT
 - Armazenamento dos cookies no MongoDB
-- Interface responsiva com Bootstrap 5
+- Interface responsiva
 
 ---
 
@@ -255,7 +255,7 @@ npm run start:pm2
 
 ## 📸 Funcionalidades visuais
 
-- Login e Cadastro (formulários com Bootstrap)
+- Login e Cadastro
 - Dashboard do usuário autenticado
 - Página de visualização de cookies locais
 - Página de leitura do MongoDB com cookies salvos
