@@ -19,7 +19,7 @@ Aplicação educacional full stack com autenticação via JWT (armazenado em coo
 
 ```
 application/backend    ← API Express (cookies, auth, MongoDB)
-application/frontend   ← React com Vite + Bootstrap via CDN
+application/frontend   ← React com Vite
 presentation           ← Reveal JS apresentação do projeto
 ```
 
