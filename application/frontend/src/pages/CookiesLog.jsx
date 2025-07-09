@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { logCookies } from '../services/api';
+import { getTokenData, logCookies } from '../services/api';
 import './CookiesLog.css';
 import './Style.css';
 import { Link } from 'react-router-dom';
@@ -14,23 +14,25 @@ export default function CookiesLog() {
     updateCookies();
   }, []);
 
-  const updateCookies = (data) => {
+  const updateCookies = async (data) => {
     try
     {
+      const aux = await getTokenData();
+      setJwtDecoded(JSON.stringify(aux, null, 2));
+
       setDocCookie(document.cookie);
       setCookies(JSON.stringify(data.log.cookies, null, 2));
-      setJwtDecoded(JSON.stringify(data.log.decodedJWT, null, 2));
+      
     }
     catch
     {
       setCookies("Aguardando envio..");
-      setJwtDecoded("Aguardando envio..");
     }
   };
 
   const handleLog = async () => {
     try {
-      const data = await logCookies();
+      const data = await logCookies();      
       setApiResponse(JSON.stringify(data.log, null, 2));
       updateCookies(data);
     } catch {

@@ -49,3 +49,35 @@ export async function getCookiesDB() {
   });
   return await res.json();
 }
+
+export async function updateUser(body) {
+  const res = await fetch(`${API}/me`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include', // garante envio do cookie
+    body: JSON.stringify(body)
+  });
+  return await res.json();
+}
+
+export async function updateTokenData(body) {
+  const res = await fetch(`${API}/me/token-data`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify(body)
+  });
+  return await res.json();
+}
+
+export async function getTokenData() {
+  const res = await fetch(`${API}/me/token-data`, {
+    method: 'GET',
+    credentials: 'include'
+  });
+  return await res.json();
+}

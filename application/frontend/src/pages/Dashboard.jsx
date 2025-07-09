@@ -27,6 +27,10 @@ export default function Dashboard() {
         <div className="dashboard-buttons">
           <Link to="/log-cookies" className="dashboard-btn secondary">📤 Log de Cookies</Link>
           <Link to="/cookies-db" className="dashboard-btn primary">🗃️ Banco de Cookies</Link>
+          
+          <Link to="/edit-credentials" className="dashboard-btn secondary">✏️ Editar E-mail/Senha</Link>
+          <Link to="/edit-token-data" className="dashboard-btn secondary">⚙️ Editar Token JWT</Link>
+
           <button onClick={handleLogout} className="dashboard-btn danger">🚪 Sair</button>
         </div>
       </div>

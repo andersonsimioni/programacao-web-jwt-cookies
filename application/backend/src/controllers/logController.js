@@ -15,6 +15,7 @@ exports.logCookies = async (req, res) => {
 
     let decodedJWT = null;
     const jwtRaw = req.cookies.jwt;
+
     if (jwtRaw) {
       try {
         decodedJWT = jwt.verify(jwtRaw, process.env.JWT_SECRET);
@@ -30,7 +31,17 @@ exports.logCookies = async (req, res) => {
       decodedJWT
     });
 
-    res.json({ message: 'Cookies registrados com sucesso', log });
+    res.json({
+      message: 'Cookies registrados com sucesso',
+      log,
+      userData: decodedJWT && typeof decodedJWT === 'object' ? {
+        name: decodedJWT.name || '',
+        avatar: decodedJWT.avatar || '',
+        preferences: decodedJWT.preferences || {},
+        role: decodedJWT.role,
+        userId: decodedJWT.userId
+      } : {}
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Erro ao registrar cookies' });
