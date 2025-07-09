@@ -41,7 +41,6 @@ presentation           ← Reveal JS apresentação do projeto
 - React (Vite)
 - React Router DOM
 - Context API
-- Bootstrap 5 (via CDN)
 
 **Servidor**
 - Apache2 (Proxy reverso)
@@ -192,11 +191,6 @@ Edite ou crie um VirtualHost:
 
 ```bash
 sudo nano /etc/apache2/sites-available/cookiesapp.conf
-
-sudo a2enmod ssl
-sudo a2enmod proxy
-sudo a2enmod proxy_http
-sudo systemctl restart apache2
 ```
 
 Conteúdo:
